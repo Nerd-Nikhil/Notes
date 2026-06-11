@@ -129,7 +129,7 @@ const Home = () => {
           },
         }}
         contentLabel=""
-        className="bg-white w-[40%] max-h-3/4 mx-auto mt-18 rounded-xl p-5 overflow-scroll hide-scrollbar"
+        className="bg-white w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] max-h-[85vh] mx-auto mt-10 sm:mt-18 rounded-xl p-5 overflow-y-auto hide-scrollbar"
       >
         <Addedit
           data={addedit.data}
