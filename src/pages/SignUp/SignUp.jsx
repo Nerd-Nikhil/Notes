@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { emailValidate } from "../../helper/chechEmail";
+import { axiosInstance } from "../../helper/axiosInstance";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
 
     if (!name) {
@@ -24,7 +26,24 @@ const SignUp = () => {
       setError("Please enter a password");
       return;
     }
-    setError("");
+    try {
+      const response = await axiosInstance.post("/signup", {
+        fullName:name,
+        email: email,
+        password: password
+      });
+    
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+          navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      }else{
+        setError("An unexpected error occured");
+      }
+      }
   };
   return (
     <div>
@@ -69,7 +88,7 @@ const SignUp = () => {
             </button>
             <p className="text-center">
               Already have account?{" "}
-              <Link to="/signup" className="text-blue-600 underline">
+              <Link to="/" className="text-blue-600 underline">
                 Login
               </Link>
             </p>

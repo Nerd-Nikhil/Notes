@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Plus,X } from "lucide-react";
-const Tags = () => {
+const Tags = ({tags,setTags}) => {
   const [tag, setTag] = useState("");
-  const [tags, setTags] = useState([]);
+  
 
   const handleTag = () => {
     const formattedTag = tag.trim();
@@ -24,14 +24,14 @@ const Tags = () => {
     <div className="flex justify-between flex-col gap-2">
         <div className="flex justify-start gap-2 flex-wrap">
       {tags.map((t,index) => (
-        <div key={index} className="flex p-1 bg-slate-200 text-black/80 rounded-md gap-2">
+        <div key={index} className="flex p-1 bg-slate-100 text-black/70 rounded-md gap-2">
         <p >{t}</p>
         <button className="cursor-pointer" onClick={()=>removeTag(index)}><X size={16}/></button>
         </div>
       ))}
       </div>
 
-      <div className="flex justify-between items-center gap-16">
+      <div className="flex justify-start items-center gap-16">
         <input
         value={tag}
           placeholder="Tags"
@@ -39,10 +39,12 @@ const Tags = () => {
           onChange={(e) => {
             setTag(e.target.value);
           }}
+          onKeyDown={(e)=>{e.key==="Enter" && handleTag}}
         />
         <button
           className="text-white bg-blue-500 p-1 rounded-md cursor-pointer"
           onClick={handleTag}
+          
         >
           <Plus />
         </button>

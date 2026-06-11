@@ -3,9 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home/Home'
 import SignUp from './pages/SignUp/SignUp'
 import Login from './pages/Login/Login'
+import Error404 from './pages/Error/Error404'
 
 const routes = createBrowserRouter([
-  {path:"/login",
+  {path:"/",
     element:<Login/>
   },
   {path:"/dashboard",
@@ -14,6 +15,10 @@ const routes = createBrowserRouter([
   {path:"/signup",
     element:<SignUp/>
   },
+  {
+    path:"*",
+    element:<Error404/>
+  }
 
 ])
 

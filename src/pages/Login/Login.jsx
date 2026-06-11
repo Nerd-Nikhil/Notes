@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { emailValidate } from "../../helper/chechEmail";
+import axios from "axios";
+import { axiosInstance } from "../../helper/axiosInstance";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!emailValidate(email)) {
@@ -19,7 +22,20 @@ const Login = () => {
       setError("Please enter a password");
       return;
     }
-    setError("");
+    
+    try {
+      const response = await axiosInstance.post("/login", {
+        email: email,
+        password: password
+      });
+
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      setError("An error occurred during login");
+    }
   };
 
   return (
