@@ -31,7 +31,7 @@ const Tags = ({tags,setTags}) => {
       ))}
       </div>
 
-      <div className="flex justify-start items-center gap-16">
+      <div className="flex items-center gap-2 sm:gap-4 w-full">
         <input
         value={tag}
           placeholder="Tags"
