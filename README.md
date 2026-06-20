@@ -6,7 +6,7 @@ The application allows users to securely create, edit, organize, pin, search, an
 
 ## Live Demo
 
-Frontend: https://your-vercel-url.vercel.app
+Frontend: https://notes-lake-eta.vercel.app/
 
 ## Features
 
@@ -63,7 +63,7 @@ src/
 Clone the repository:
 
 ```bash
-git clone <frontend-repository-url>
+git clone https://github.com/Nerd-Nikhil/Notes
 ```
 
 Install dependencies:
@@ -88,7 +88,7 @@ VITE_API_URL=http://localhost:8000
 
 ## Backend Repository
 
-https://github.com/yourusername/notes-backend
+https://github.com/Nerd-Nikhil/Notes-backend
 
 ## Future Improvements
 
